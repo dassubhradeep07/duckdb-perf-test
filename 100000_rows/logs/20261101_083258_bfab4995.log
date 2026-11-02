@@ -1,0 +1,246 @@
+2026-11-01 08:32:58,348 | INFO     | MainThread | Run ID: 20261101_083258_bfab4995
+2026-11-01 08:32:58,450 | INFO     | MainThread | Selected dataset: 100,000 rows | folder: C:\Users\SUBHRADEEP\duck-load-test\batches\100000_rows
+2026-11-01 08:32:58,451 | DEBUG    | MainThread | SQL operation:
+SELECT count(*) FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/raw/customers.parquet')
+2026-11-01 08:32:58,453 | INFO     | MainThread | CPU: Intel(R) Core(TM) i5-3450 CPU @ 3.10GHz | cores: 4 | RAM: 8461.54 MB
+2026-11-01 08:32:58,453 | INFO     | MainThread | DuckDB: 1.5.6 | threads: 2 | memory budget: 3000.00 MB | matching: email
+2026-11-01 08:32:58,454 | INFO     | MainThread | ▶ [raw] Started
+2026-11-01 08:32:58,455 | DEBUG    | MainThread | [raw] Start: 2026-11-01T03:02:58.454432+00:00 | Input: ['C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\raw\\customers.parquet'] | Output: []
+2026-11-01 08:32:58,455 | INFO     | MainThread | [raw] Input: data\raw\customers.parquet
+2026-11-01 08:32:58,455 | DEBUG    | MainThread | [raw] Memory sampling SQL: SELECT sum(memory_usage_bytes) FROM duckdb_memory()
+2026-11-01 08:32:58,495 | DEBUG    | MainThread | SQL operation:
+SELECT count(*) FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/raw/customers.parquet')
+2026-11-01 08:32:58,496 | DEBUG    | MainThread | SQL operation:
+SELECT * FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/raw/customers.parquet') LIMIT 0
+2026-11-01 08:32:58,498 | INFO     | MainThread | [raw] column count: 8
+2026-11-01 08:32:58,538 | INFO     | MainThread | ✓ [raw] success | 0.083s | 100000 -> 100000 rows | 1,197,808 rows/sec
+2026-11-01 08:32:58,538 | DEBUG    | MainThread | [raw] Full measured statistics (MB): {"stage": "raw", "status": "success", "started_at": "2026-11-01T03:02:58.454432+00:00", "input_rows": 100000, "output_rows": 100000, "input_paths": ["C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\raw\\customers.parquet"], "output_paths": [], "input_mb": 2.107, "physical_cores": 4, "logical_cpus": 4, "duckdb_memory_budget_mb": 3000.0, "configured_threads": 2, "duckdb_managed_memory_mb": 0.23, "python_traced_current_mb": 0.005, "python_trace_scope": "stage_allocations", "duckdb_memory_sample_count": 2, "column_count": 8, "ended_at": "2026-11-01T03:02:58.537906+00:00", "elapsed_seconds": 0.08348580001620576, "rows_per_second": 1197808.4893549394, "output_mb": 0.0, "peak_process_rss_mb": 48.624, "peak_temp_mb": 0.0, "peak_system_ram_percent": 67.6, "system_cpu_percent_sample_mean": 20.0, "process_cpu_percent": 93.57878823085464, "peak_process_thread_count": 11, "peak_active_process_threads": 1, "peak_process_cpu_percent": 108.93360110496837, "peak_cpu_cores_used": 1.0893360110496837, "peak_configured_thread_capacity_percent": 54.46680055248419, "peak_process_rss_vs_budget_percent": 1.6207872, "min_available_system_ram_mb": 2743.325, "min_disk_free_mb": 68867.92, "resource_sample_count": 2, "process_rss_mb": 48.624, "temp_mb": 0.0, "process_thread_count": 11, "active_process_threads": 1, "total_system_ram_mb": 8461.537, "available_system_ram_mb": 2744.238, "used_system_ram_mb": 5717.299, "system_ram_percent": 67.6, "disk_total_mb": 215330.32, "disk_used_mb": 146462.401, "disk_free_mb": 68867.92, "average_cpu_cores_used": 0.9357878823085464, "average_configured_thread_capacity_percent": 46.78939411542732, "process_machine_cpu_percent": 23.39469705771366, "process_rss_vs_budget_percent": 1.6207872, "peak_duckdb_managed_memory_mb": 0.287, "peak_python_traced_mb": 0.011, "duckdb_managed_vs_budget_percent": 0.007651266666666667, "peak_duckdb_managed_vs_budget_percent": 0.009562733333333334}
+2026-11-01 08:32:58,539 | INFO     | MainThread | [raw] Memory | DuckDB budget: 3000.00 MB | process used (RSS): 48.6 MB | peak used: 48.6 MB
+2026-11-01 08:32:58,539 | INFO     | MainThread | [raw] Memory ratio | peak process RSS / DuckDB budget: 1.62%
+2026-11-01 08:32:58,539 | INFO     | MainThread | [raw] DuckDB tracked | current: 0.23 MB | observed peak: 0.29 MB | peak / budget: 0.01%
+2026-11-01 08:32:58,540 | INFO     | MainThread | [raw] Python traced | current: 0.01 MB | peak: 0.01 MB | scope: stage_allocations
+2026-11-01 08:32:58,540 | INFO     | MainThread | [raw] Threads | DuckDB configured: 2 | peak process total: 11 | peak observed active: 1
+2026-11-01 08:32:58,540 | INFO     | MainThread | [raw] CPU capacity | average: 0.94 cores (46.8% of configured threads) | peak sampled: 1.09 cores (54.5%)
+2026-11-01 08:32:58,541 | INFO     | MainThread | [raw] System RAM | total: 8461.5 MB | used: 5717.3 MB (67.6%) | available: 2744.2 MB
+2026-11-01 08:32:58,541 | INFO     | MainThread | [raw] CPU | process: 93.6% | system sample mean: 20.0%
+2026-11-01 08:32:58,541 | INFO     | MainThread | [raw] Disk | input: 2.1 MB | output: 0.0 MB | peak temp: 0.0 MB | free: 68867.9 MB
+2026-11-01 08:32:58,542 | INFO     | MainThread | ▶ [validation] Started
+2026-11-01 08:32:58,542 | DEBUG    | MainThread | [validation] Start: 2026-11-01T03:02:58.542077+00:00 | Input: ['C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\raw\\customers.parquet'] | Output: ['C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\valid.parquet', 'C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\rejected.parquet']
+2026-11-01 08:32:58,542 | INFO     | MainThread | [validation] Input: data\raw\customers.parquet
+2026-11-01 08:32:58,543 | INFO     | MainThread | [validation] Output: data\silver\valid.parquet, data\silver\rejected.parquet
+2026-11-01 08:32:58,543 | DEBUG    | MainThread | [validation] Memory sampling SQL: SELECT sum(memory_usage_bytes) FROM duckdb_memory()
+2026-11-01 08:32:58,583 | DEBUG    | MainThread | SQL operation:
+
+        CREATE OR REPLACE TEMP VIEW checked AS
+        WITH duplicates AS (
+            SELECT *, count(*) OVER (PARTITION BY customer_id) AS id_count
+            FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/raw/customers.parquet')
+        )
+        SELECT *, concat_ws('; ',
+            CASE WHEN customer_id IS NULL THEN 'missing_customer_id' END,
+            CASE WHEN customer_name IS NULL OR trim(regexp_replace(customer_name, '\s+', ' ', 'g')) = ''
+                 THEN 'missing_customer_name' END,
+            CASE WHEN email IS NULL OR NOT regexp_full_match(trim(email), '[^\s@]+@[^\s@.]+\.[^\s@]+')
+                 THEN 'invalid_email' END,
+            CASE WHEN phone IS NULL OR NOT regexp_full_match(regexp_replace(phone, '[^0-9]', '', 'g'), '[0-9]{10,15}')
+                 THEN 'invalid_phone' END,
+            CASE WHEN customer_id IS NOT NULL AND id_count > 1 THEN 'duplicate_customer_id' END
+        ) AS rejection_reason
+        FROM duplicates
+    
+2026-11-01 08:32:58,586 | DEBUG    | MainThread | SQL operation:
+COPY (SELECT * EXCLUDE (id_count) FROM checked WHERE rejection_reason <> '') TO 'C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/rejected.partial.parquet' (FORMAT PARQUET, COMPRESSION SNAPPY)
+2026-11-01 08:32:58,805 | DEBUG    | MainThread | SQL operation:
+COPY (SELECT * EXCLUDE (id_count, rejection_reason) FROM checked WHERE rejection_reason = '') TO 'C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/valid.partial.parquet' (FORMAT PARQUET, COMPRESSION SNAPPY)
+2026-11-01 08:32:59,080 | DEBUG    | MainThread | SQL operation:
+
+        SELECT count(*), count(*) FILTER (WHERE customer_id IS NULL),
+               count(*) FILTER (WHERE customer_name IS NULL),
+               count(*) FILTER (WHERE email IS NULL), count(*) FILTER (WHERE phone IS NULL),
+               count(*) FILTER (WHERE city IS NULL), count(*) FILTER (WHERE country IS NULL),
+               count(*) FILTER (WHERE source_system IS NULL), count(*) FILTER (WHERE updated_date IS NULL),
+               count(*) FILTER (WHERE customer_id IS NOT NULL AND id_count > 1),
+               count(DISTINCT customer_id) FILTER (WHERE customer_id IS NOT NULL AND id_count > 1)
+        FROM checked
+    
+2026-11-01 08:32:59,131 | DEBUG    | MainThread | SQL operation:
+SELECT count(*) FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/valid.parquet')
+2026-11-01 08:32:59,140 | DEBUG    | MainThread | SQL operation:
+SELECT count(*) FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/rejected.parquet')
+2026-11-01 08:32:59,149 | INFO     | MainThread | [validation] rejected rows: 7759 | duplicate rows: 1954 | duplicate ids: 977 | validation percent: 92.24
+2026-11-01 08:32:59,190 | INFO     | MainThread | ✓ [validation] success | 0.648s | 100000 -> 92241 rows | 154,252 rows/sec
+2026-11-01 08:32:59,191 | DEBUG    | MainThread | [validation] Full measured statistics (MB): {"stage": "validation", "status": "success", "started_at": "2026-11-01T03:02:58.542077+00:00", "input_rows": 100000, "output_rows": 92241, "input_paths": ["C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\raw\\customers.parquet"], "output_paths": ["C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\valid.parquet", "C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\rejected.parquet"], "input_mb": 2.107, "physical_cores": 4, "logical_cpus": 4, "duckdb_memory_budget_mb": 3000.0, "configured_threads": 2, "duckdb_managed_memory_mb": 0.353, "python_traced_current_mb": 0.005, "python_trace_scope": "stage_allocations", "duckdb_memory_sample_count": 2, "rejected_rows": 7759, "null_counts": {"customer_id": 1000, "customer_name": 1001, "email": 0, "phone": 2005, "city": 0, "country": 0, "source_system": 0, "updated_date": 0}, "duplicate_rows": 1954, "duplicate_ids": 977, "validation_percent": 92.241, "ended_at": "2026-11-01T03:02:59.190357+00:00", "elapsed_seconds": 0.6482909999904223, "rows_per_second": 154251.7172095207, "output_mb": 2.201, "peak_process_rss_mb": 52.335, "peak_temp_mb": 0.0, "peak_system_ram_percent": 67.5, "system_cpu_percent_sample_mean": 18.9, "process_cpu_percent": 103.63787250014671, "peak_process_thread_count": 11, "peak_active_process_threads": 2, "peak_process_cpu_percent": 103.63787250014671, "peak_cpu_cores_used": 1.036378725001467, "peak_configured_thread_capacity_percent": 51.81893625007336, "peak_process_rss_vs_budget_percent": 1.7444864, "min_available_system_ram_mb": 2747.818, "min_disk_free_mb": 68865.72, "resource_sample_count": 2, "process_rss_mb": 52.335, "temp_mb": 0.0, "process_thread_count": 11, "active_process_threads": 2, "total_system_ram_mb": 8461.537, "available_system_ram_mb": 2747.818, "used_system_ram_mb": 5713.719, "system_ram_percent": 67.5, "disk_total_mb": 215330.32, "disk_used_mb": 146464.6, "disk_free_mb": 68865.72, "average_cpu_cores_used": 1.036378725001467, "average_configured_thread_capacity_percent": 51.81893625007336, "process_machine_cpu_percent": 25.90946812503668, "process_rss_vs_budget_percent": 1.7444864, "peak_duckdb_managed_memory_mb": 0.353, "peak_python_traced_mb": 0.012, "duckdb_managed_vs_budget_percent": 0.011758133333333334, "peak_duckdb_managed_vs_budget_percent": 0.011758133333333334}
+2026-11-01 08:32:59,191 | INFO     | MainThread | [validation] Memory | DuckDB budget: 3000.00 MB | process used (RSS): 52.3 MB | peak used: 52.3 MB
+2026-11-01 08:32:59,192 | INFO     | MainThread | [validation] Memory ratio | peak process RSS / DuckDB budget: 1.74%
+2026-11-01 08:32:59,192 | INFO     | MainThread | [validation] DuckDB tracked | current: 0.35 MB | observed peak: 0.35 MB | peak / budget: 0.01%
+2026-11-01 08:32:59,193 | INFO     | MainThread | [validation] Python traced | current: 0.01 MB | peak: 0.01 MB | scope: stage_allocations
+2026-11-01 08:32:59,193 | INFO     | MainThread | [validation] Threads | DuckDB configured: 2 | peak process total: 11 | peak observed active: 2
+2026-11-01 08:32:59,193 | INFO     | MainThread | [validation] CPU capacity | average: 1.04 cores (51.8% of configured threads) | peak sampled: 1.04 cores (51.8%)
+2026-11-01 08:32:59,194 | INFO     | MainThread | [validation] System RAM | total: 8461.5 MB | used: 5713.7 MB (67.5%) | available: 2747.8 MB
+2026-11-01 08:32:59,194 | INFO     | MainThread | [validation] CPU | process: 103.6% | system sample mean: 18.9%
+2026-11-01 08:32:59,194 | INFO     | MainThread | [validation] Disk | input: 2.1 MB | output: 2.2 MB | peak temp: 0.0 MB | free: 68865.7 MB
+2026-11-01 08:32:59,195 | INFO     | MainThread | ▶ [transformation] Started
+2026-11-01 08:32:59,195 | DEBUG    | MainThread | [transformation] Start: 2026-11-01T03:02:59.195391+00:00 | Input: ['C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\valid.parquet'] | Output: ['C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\customers.parquet']
+2026-11-01 08:32:59,196 | INFO     | MainThread | [transformation] Input: data\silver\valid.parquet
+2026-11-01 08:32:59,196 | INFO     | MainThread | [transformation] Output: data\silver\customers.parquet
+2026-11-01 08:32:59,197 | DEBUG    | MainThread | [transformation] Memory sampling SQL: SELECT sum(memory_usage_bytes) FROM duckdb_memory()
+2026-11-01 08:32:59,240 | DEBUG    | MainThread | SQL operation:
+SELECT count(*) FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/valid.parquet')
+2026-11-01 08:32:59,242 | DEBUG    | MainThread | SQL operation:
+COPY (
+        SELECT customer_id,
+               upper(trim(regexp_replace(customer_name, '\s+', ' ', 'g'))) AS customer_name,
+               lower(trim(email)) AS email,
+               regexp_replace(phone, '[^0-9]', '', 'g') AS phone,
+               upper(trim(regexp_replace(city, '\s+', ' ', 'g'))) AS city,
+               upper(trim(regexp_replace(country, '\s+', ' ', 'g'))) AS country,
+               trim(source_system) AS source_system, updated_date
+        FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/valid.parquet')
+    ) TO 'C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/customers.partial.parquet' (FORMAT PARQUET, COMPRESSION SNAPPY)
+2026-11-01 08:32:59,495 | DEBUG    | MainThread | SQL operation:
+SELECT count(*) FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/customers.parquet')
+2026-11-01 08:32:59,594 | INFO     | MainThread | ✓ [transformation] success | 0.398s | 92241 -> 92241 rows | 231,535 rows/sec
+2026-11-01 08:32:59,681 | DEBUG    | MainThread | [transformation] Full measured statistics (MB): {"stage": "transformation", "status": "success", "started_at": "2026-11-01T03:02:59.195391+00:00", "input_rows": 92241, "output_rows": 92241, "input_paths": ["C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\valid.parquet"], "output_paths": ["C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\customers.parquet"], "input_mb": 2.018, "physical_cores": 4, "logical_cpus": 4, "duckdb_memory_budget_mb": 3000.0, "configured_threads": 2, "duckdb_managed_memory_mb": 0.402, "python_traced_current_mb": 0.003, "python_trace_scope": "stage_allocations", "duckdb_memory_sample_count": 2, "ended_at": "2026-11-01T03:02:59.593767+00:00", "elapsed_seconds": 0.3983882000029553, "rows_per_second": 231535.4721834526, "output_mb": 1.901, "peak_process_rss_mb": 52.445, "peak_temp_mb": 0.0, "peak_system_ram_percent": 68.1, "system_cpu_percent_sample_mean": 38.35, "process_cpu_percent": 129.4277792354731, "peak_process_thread_count": 11, "peak_active_process_threads": 2, "peak_process_cpu_percent": 132.55132529083986, "peak_cpu_cores_used": 1.3255132529083986, "peak_configured_thread_capacity_percent": 66.27566264541993, "peak_process_rss_vs_budget_percent": 1.7481728, "min_available_system_ram_mb": 2698.449, "min_disk_free_mb": 68863.812, "resource_sample_count": 2, "process_rss_mb": 52.445, "temp_mb": 0.0, "process_thread_count": 11, "active_process_threads": 2, "total_system_ram_mb": 8461.537, "available_system_ram_mb": 2698.449, "used_system_ram_mb": 5763.088, "system_ram_percent": 68.1, "disk_total_mb": 215330.32, "disk_used_mb": 146466.509, "disk_free_mb": 68863.812, "average_cpu_cores_used": 1.294277792354731, "average_configured_thread_capacity_percent": 64.71388961773656, "process_machine_cpu_percent": 32.35694480886828, "process_rss_vs_budget_percent": 1.7481728, "peak_duckdb_managed_memory_mb": 0.402, "peak_python_traced_mb": 0.01, "duckdb_managed_vs_budget_percent": 0.013402133333333333, "peak_duckdb_managed_vs_budget_percent": 0.013402133333333333}
+2026-11-01 08:32:59,682 | INFO     | MainThread | [transformation] Memory | DuckDB budget: 3000.00 MB | process used (RSS): 52.4 MB | peak used: 52.4 MB
+2026-11-01 08:32:59,699 | INFO     | MainThread | [transformation] Memory ratio | peak process RSS / DuckDB budget: 1.75%
+2026-11-01 08:32:59,746 | INFO     | MainThread | [transformation] DuckDB tracked | current: 0.40 MB | observed peak: 0.40 MB | peak / budget: 0.01%
+2026-11-01 08:32:59,754 | INFO     | MainThread | [transformation] Python traced | current: 0.00 MB | peak: 0.01 MB | scope: stage_allocations
+2026-11-01 08:32:59,757 | INFO     | MainThread | [transformation] Threads | DuckDB configured: 2 | peak process total: 11 | peak observed active: 2
+2026-11-01 08:32:59,759 | INFO     | MainThread | [transformation] CPU capacity | average: 1.29 cores (64.7% of configured threads) | peak sampled: 1.33 cores (66.3%)
+2026-11-01 08:32:59,761 | INFO     | MainThread | [transformation] System RAM | total: 8461.5 MB | used: 5763.1 MB (68.1%) | available: 2698.4 MB
+2026-11-01 08:32:59,765 | INFO     | MainThread | [transformation] CPU | process: 129.4% | system sample mean: 38.4%
+2026-11-01 08:32:59,769 | INFO     | MainThread | [transformation] Disk | input: 2.0 MB | output: 1.9 MB | peak temp: 0.0 MB | free: 68863.8 MB
+2026-11-01 08:32:59,771 | INFO     | MainThread | ▶ [matching] Started
+2026-11-01 08:32:59,772 | DEBUG    | MainThread | [matching] Start: 2026-11-01T03:02:59.771318+00:00 | Input: ['C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\customers.parquet', 'C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\raw\\reference.parquet'] | Output: ['C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\matching.parquet', 'C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\matched.parquet', 'C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\unmatched.parquet', 'C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\ambiguous.parquet']
+2026-11-01 08:32:59,772 | INFO     | MainThread | [matching] Input: data\silver\customers.parquet, data\raw\reference.parquet
+2026-11-01 08:32:59,773 | INFO     | MainThread | [matching] Output: data\silver\matching.parquet, data\silver\matched.parquet, data\silver\unmatched.parquet, data\silver\ambiguous.parquet
+2026-11-01 08:32:59,773 | DEBUG    | MainThread | [matching] Memory sampling SQL: SELECT sum(memory_usage_bytes) FROM duckdb_memory()
+2026-11-01 08:32:59,846 | DEBUG    | MainThread | SQL operation:
+CREATE OR REPLACE TEMP VIEW reference_clean AS 
+        SELECT master_id,
+               upper(trim(regexp_replace(customer_name, '\s+', ' ', 'g'))) AS customer_name,
+               lower(trim(email)) AS email,
+               regexp_replace(phone, '[^0-9]', '', 'g') AS phone,
+               upper(trim(regexp_replace(city, '\s+', ' ', 'g'))) AS city,
+               upper(trim(regexp_replace(country, '\s+', ' ', 'g'))) AS country,
+               trim(source_system) AS source_system, updated_date
+        FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/raw/reference.parquet')
+    
+2026-11-01 08:32:59,849 | DEBUG    | MainThread | SQL operation:
+
+        SELECT count(*), count(DISTINCT master_id),
+               count(*) FILTER (WHERE master_id IS NULL OR master_id < 1)
+        FROM reference_clean
+    
+2026-11-01 08:32:59,864 | DEBUG    | MainThread | SQL operation:
+
+        CREATE OR REPLACE TEMP VIEW reference_keys AS
+        SELECT email, count(*) AS reference_count, min(master_id) AS candidate_master_id
+        FROM reference_clean WHERE email IS NOT NULL AND email <> '' GROUP BY email
+    
+2026-11-01 08:32:59,868 | DEBUG    | MainThread | SQL operation:
+SELECT count(*) FROM reference_keys WHERE reference_count > 1
+2026-11-01 08:33:00,002 | WARNING  | MainThread | ⚠ 1000 duplicate reference keys will require review
+2026-11-01 08:33:00,003 | DEBUG    | MainThread | SQL operation:
+COPY (
+        SELECT s.*, coalesce(r.reference_count, 0) AS reference_count,
+               CASE WHEN r.reference_count = 1 THEN r.candidate_master_id END AS matched_master_id,
+               CASE WHEN r.reference_count > 1 THEN 'ambiguous'
+                    WHEN r.reference_count = 1 THEN 'matched' ELSE 'unmatched' END AS match_status
+        FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/customers.parquet') s LEFT JOIN reference_keys r ON s.email = r.email
+    ) TO 'C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/matching.partial.parquet' (FORMAT PARQUET, COMPRESSION SNAPPY)
+2026-11-01 08:33:00,263 | DEBUG    | MainThread | SQL operation:
+COPY (SELECT * FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/matching.parquet') WHERE match_status = 'matched') TO 'C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/matched.partial.parquet' (FORMAT PARQUET, COMPRESSION SNAPPY)
+2026-11-01 08:33:00,310 | DEBUG    | MainThread | SQL operation:
+SELECT count(*) FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/matched.parquet')
+2026-11-01 08:33:00,319 | DEBUG    | MainThread | SQL operation:
+COPY (SELECT * FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/matching.parquet') WHERE match_status = 'unmatched') TO 'C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/unmatched.partial.parquet' (FORMAT PARQUET, COMPRESSION SNAPPY)
+2026-11-01 08:33:00,390 | DEBUG    | MainThread | SQL operation:
+SELECT count(*) FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/unmatched.parquet')
+2026-11-01 08:33:00,398 | DEBUG    | MainThread | SQL operation:
+COPY (SELECT * FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/matching.parquet') WHERE match_status = 'ambiguous') TO 'C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/ambiguous.partial.parquet' (FORMAT PARQUET, COMPRESSION SNAPPY)
+2026-11-01 08:33:00,413 | DEBUG    | MainThread | SQL operation:
+SELECT count(*) FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/ambiguous.parquet')
+2026-11-01 08:33:00,421 | DEBUG    | MainThread | SQL operation:
+SELECT count(*) FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/customers.parquet')
+2026-11-01 08:33:00,422 | INFO     | MainThread | [matching] reference rows: 100000 | duplicate reference keys: 1000 | match rule: email | match percent: 34.66 | matched rows: 31974 | unmatched rows: 59936 | ambiguous rows: 331
+2026-11-01 08:33:00,464 | INFO     | MainThread | ✓ [matching] success | 0.693s | 92241 -> 92241 rows | 133,101 rows/sec
+2026-11-01 08:33:00,465 | DEBUG    | MainThread | [matching] Full measured statistics (MB): {"stage": "matching", "status": "success", "started_at": "2026-11-01T03:02:59.771318+00:00", "input_rows": 92241, "output_rows": 92241, "input_paths": ["C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\customers.parquet", "C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\raw\\reference.parquet"], "output_paths": ["C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\matching.parquet", "C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\matched.parquet", "C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\unmatched.parquet", "C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\ambiguous.parquet"], "input_mb": 3.865, "physical_cores": 4, "logical_cpus": 4, "duckdb_memory_budget_mb": 3000.0, "configured_threads": 2, "duckdb_managed_memory_mb": 0.448, "python_traced_current_mb": 0.009, "python_trace_scope": "stage_allocations", "duckdb_memory_sample_count": 2, "reference_rows": 100000, "duplicate_reference_keys": 1000, "match_rule": "email", "match_percent": 34.66354441083683, "matched_rows": 31974, "unmatched_rows": 59936, "ambiguous_rows": 331, "ended_at": "2026-11-01T03:03:00.464313+00:00", "elapsed_seconds": 0.6930142000201158, "rows_per_second": 133101.16877449633, "output_mb": 4.077, "peak_process_rss_mb": 52.912, "peak_temp_mb": 0.0, "peak_system_ram_percent": 68.7, "system_cpu_percent_sample_mean": 38.1, "process_cpu_percent": 126.2600391124167, "peak_process_thread_count": 11, "peak_active_process_threads": 2, "peak_process_cpu_percent": 131.35344487876964, "peak_cpu_cores_used": 1.3135344487876963, "peak_configured_thread_capacity_percent": 65.67672243938482, "peak_process_rss_vs_budget_percent": 1.7637376, "min_available_system_ram_mb": 2648.941, "min_disk_free_mb": 68859.716, "resource_sample_count": 2, "process_rss_mb": 52.912, "temp_mb": 0.0, "process_thread_count": 11, "active_process_threads": 2, "total_system_ram_mb": 8461.537, "available_system_ram_mb": 2648.941, "used_system_ram_mb": 5812.597, "system_ram_percent": 68.7, "disk_total_mb": 215330.32, "disk_used_mb": 146470.605, "disk_free_mb": 68859.716, "average_cpu_cores_used": 1.262600391124167, "average_configured_thread_capacity_percent": 63.13001955620835, "process_machine_cpu_percent": 31.565009778104177, "process_rss_vs_budget_percent": 1.7637376, "peak_duckdb_managed_memory_mb": 0.448, "peak_python_traced_mb": 0.015, "duckdb_managed_vs_budget_percent": 0.0149316, "peak_duckdb_managed_vs_budget_percent": 0.0149316}
+2026-11-01 08:33:00,465 | INFO     | MainThread | [matching] Memory | DuckDB budget: 3000.00 MB | process used (RSS): 52.9 MB | peak used: 52.9 MB
+2026-11-01 08:33:00,466 | INFO     | MainThread | [matching] Memory ratio | peak process RSS / DuckDB budget: 1.76%
+2026-11-01 08:33:00,466 | INFO     | MainThread | [matching] DuckDB tracked | current: 0.45 MB | observed peak: 0.45 MB | peak / budget: 0.01%
+2026-11-01 08:33:00,467 | INFO     | MainThread | [matching] Python traced | current: 0.01 MB | peak: 0.02 MB | scope: stage_allocations
+2026-11-01 08:33:00,467 | INFO     | MainThread | [matching] Threads | DuckDB configured: 2 | peak process total: 11 | peak observed active: 2
+2026-11-01 08:33:00,468 | INFO     | MainThread | [matching] CPU capacity | average: 1.26 cores (63.1% of configured threads) | peak sampled: 1.31 cores (65.7%)
+2026-11-01 08:33:00,468 | INFO     | MainThread | [matching] System RAM | total: 8461.5 MB | used: 5812.6 MB (68.7%) | available: 2648.9 MB
+2026-11-01 08:33:00,469 | INFO     | MainThread | [matching] CPU | process: 126.3% | system sample mean: 38.1%
+2026-11-01 08:33:00,469 | INFO     | MainThread | [matching] Disk | input: 3.9 MB | output: 4.1 MB | peak temp: 0.0 MB | free: 68859.7 MB
+2026-11-01 08:33:00,471 | INFO     | MainThread | ▶ [gold] Started
+2026-11-01 08:33:00,471 | DEBUG    | MainThread | [gold] Start: 2026-11-01T03:03:00.470419+00:00 | Input: ['C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\raw\\reference.parquet', 'C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\matched.parquet', 'C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\unmatched.parquet', 'C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\ambiguous.parquet'] | Output: ['C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\gold\\customers.parquet', 'C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\gold\\review.parquet']
+2026-11-01 08:33:00,471 | INFO     | MainThread | [gold] Input: data\raw\reference.parquet, data\silver\matched.parquet, data\silver\unmatched.parquet, data\silver\ambiguous.parquet
+2026-11-01 08:33:00,472 | INFO     | MainThread | [gold] Output: data\gold\customers.parquet, data\gold\review.parquet
+2026-11-01 08:33:00,473 | DEBUG    | MainThread | [gold] Memory sampling SQL: SELECT sum(memory_usage_bytes) FROM duckdb_memory()
+2026-11-01 08:33:00,515 | DEBUG    | MainThread | SQL operation:
+CREATE OR REPLACE TEMP VIEW reference_clean AS 
+        SELECT master_id,
+               upper(trim(regexp_replace(customer_name, '\s+', ' ', 'g'))) AS customer_name,
+               lower(trim(email)) AS email,
+               regexp_replace(phone, '[^0-9]', '', 'g') AS phone,
+               upper(trim(regexp_replace(city, '\s+', ' ', 'g'))) AS city,
+               upper(trim(regexp_replace(country, '\s+', ' ', 'g'))) AS country,
+               trim(source_system) AS source_system, updated_date
+        FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/raw/reference.parquet')
+    
+2026-11-01 08:33:00,518 | DEBUG    | MainThread | SQL operation:
+
+        SELECT count(*), count(DISTINCT master_id),
+               count(*) FILTER (WHERE master_id IS NULL OR master_id < 1)
+        FROM reference_clean
+    
+2026-11-01 08:33:00,530 | DEBUG    | MainThread | SQL operation:
+SELECT count(*) FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/matched.parquet')
+2026-11-01 08:33:00,532 | DEBUG    | MainThread | SQL operation:
+SELECT count(*) FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/unmatched.parquet')
+2026-11-01 08:33:00,534 | DEBUG    | MainThread | SQL operation:
+SELECT count(*) FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/ambiguous.parquet')
+2026-11-01 08:33:00,536 | DEBUG    | MainThread | SQL operation:
+COPY (
+        WITH existing_candidates AS (
+            SELECT master_id, customer_name, email, phone, city, country, source_system, updated_date, 0 AS priority, 0::BIGINT AS customer_id FROM reference_clean
+            UNION ALL
+            SELECT matched_master_id AS master_id, customer_name, email, phone, city, country, source_system, updated_date, 1 AS priority, customer_id FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/matched.parquet')
+        ), existing_winners AS (
+            SELECT master_id, customer_name, email, phone, city, country, source_system, updated_date FROM existing_candidates
+            QUALIFY row_number() OVER (
+                PARTITION BY master_id ORDER BY updated_date DESC NULLS LAST, priority, customer_id
+            ) = 1
+        ), new_winners AS (
+            SELECT * FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/unmatched.parquet')
+            QUALIFY row_number() OVER (
+                PARTITION BY email ORDER BY updated_date DESC NULLS LAST, customer_id
+            ) = 1
+        ), new_masters AS (
+            SELECT (SELECT coalesce(max(master_id), 0) FROM reference_clean)
+                   + row_number() OVER (ORDER BY customer_id) AS master_id, customer_name, email, phone, city, country, source_system, updated_date
+            FROM new_winners
+        )
+        SELECT * FROM existing_winners UNION ALL SELECT * FROM new_masters
+    ) TO 'C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/gold/customers.partial.parquet' (FORMAT PARQUET, COMPRESSION SNAPPY)
+2026-11-01 08:33:00,872 | DEBUG    | MainThread | SQL operation:
+COPY (SELECT * FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/silver/ambiguous.parquet')) TO 'C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/gold/review.partial.parquet' (FORMAT PARQUET, COMPRESSION SNAPPY)
+2026-11-01 08:33:00,877 | DEBUG    | MainThread | SQL operation:
+SELECT count(*), count(DISTINCT master_id) FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/gold/customers.parquet')
+2026-11-01 08:33:00,895 | INFO     | MainThread | [gold] existing masters retained: 100000 | new masters created: 59936 | ambiguous excluded: 331 | unmatched rows consolidated: 0
+2026-11-01 08:33:00,936 | INFO     | MainThread | ✓ [gold] success | 0.466s | 92241 -> 159936 rows | 197,870 rows/sec
+2026-11-01 08:33:00,937 | DEBUG    | MainThread | [gold] Full measured statistics (MB): {"stage": "gold", "status": "success", "started_at": "2026-11-01T03:03:00.470419+00:00", "input_rows": 92241, "output_rows": 159936, "input_paths": ["C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\raw\\reference.parquet", "C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\matched.parquet", "C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\unmatched.parquet", "C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\silver\\ambiguous.parquet"], "output_paths": ["C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\gold\\customers.parquet", "C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\gold\\review.parquet"], "input_mb": 4.009, "physical_cores": 4, "logical_cpus": 4, "duckdb_memory_budget_mb": 3000.0, "configured_threads": 2, "duckdb_managed_memory_mb": 0.411, "python_traced_current_mb": 0.005, "python_trace_scope": "stage_allocations", "duckdb_memory_sample_count": 2, "existing_masters_retained": 100000, "new_masters_created": 59936, "ambiguous_excluded": 331, "unmatched_rows_consolidated": 0, "ended_at": "2026-11-01T03:03:00.936571+00:00", "elapsed_seconds": 0.4661692999943625, "rows_per_second": 197870.1729202577, "output_mb": 3.579, "peak_process_rss_mb": 55.312, "peak_temp_mb": 0.0, "peak_system_ram_percent": 68.8, "system_cpu_percent_sample_mean": 25.95, "process_cpu_percent": 147.47860916802418, "peak_process_thread_count": 11, "peak_active_process_threads": 2, "peak_process_cpu_percent": 151.95771347323122, "peak_cpu_cores_used": 1.5195771347323122, "peak_configured_thread_capacity_percent": 75.97885673661561, "peak_process_rss_vs_budget_percent": 1.8437461333333334, "min_available_system_ram_mb": 2643.096, "min_disk_free_mb": 68856.029, "resource_sample_count": 2, "process_rss_mb": 55.312, "temp_mb": 0.0, "process_thread_count": 11, "active_process_threads": 2, "total_system_ram_mb": 8461.537, "available_system_ram_mb": 2643.096, "used_system_ram_mb": 5818.442, "system_ram_percent": 68.8, "disk_total_mb": 215330.32, "disk_used_mb": 146474.291, "disk_free_mb": 68856.029, "average_cpu_cores_used": 1.4747860916802418, "average_configured_thread_capacity_percent": 73.73930458401209, "process_machine_cpu_percent": 36.869652292006045, "process_rss_vs_budget_percent": 1.8437461333333334, "peak_duckdb_managed_memory_mb": 0.448, "peak_python_traced_mb": 0.016, "duckdb_managed_vs_budget_percent": 0.013708266666666667, "peak_duckdb_managed_vs_budget_percent": 0.0149316}
+2026-11-01 08:33:00,937 | INFO     | MainThread | [gold] Memory | DuckDB budget: 3000.00 MB | process used (RSS): 55.3 MB | peak used: 55.3 MB
+2026-11-01 08:33:00,938 | INFO     | MainThread | [gold] Memory ratio | peak process RSS / DuckDB budget: 1.84%
+2026-11-01 08:33:00,939 | INFO     | MainThread | [gold] DuckDB tracked | current: 0.41 MB | observed peak: 0.45 MB | peak / budget: 0.01%
+2026-11-01 08:33:00,939 | INFO     | MainThread | [gold] Python traced | current: 0.01 MB | peak: 0.02 MB | scope: stage_allocations
+2026-11-01 08:33:00,940 | INFO     | MainThread | [gold] Threads | DuckDB configured: 2 | peak process total: 11 | peak observed active: 2
+2026-11-01 08:33:00,940 | INFO     | MainThread | [gold] CPU capacity | average: 1.47 cores (73.7% of configured threads) | peak sampled: 1.52 cores (76.0%)
+2026-11-01 08:33:00,940 | INFO     | MainThread | [gold] System RAM | total: 8461.5 MB | used: 5818.4 MB (68.8%) | available: 2643.1 MB
+2026-11-01 08:33:00,941 | INFO     | MainThread | [gold] CPU | process: 147.5% | system sample mean: 25.9%
+2026-11-01 08:33:00,941 | INFO     | MainThread | [gold] Disk | input: 4.0 MB | output: 3.6 MB | peak temp: 0.0 MB | free: 68856.0 MB
+2026-11-01 08:33:00,952 | INFO     | MainThread | Run 20261101_083258_bfab4995 | success | 2.518s | raw 2.107 MB | reference 1.964 MB | retained Parquet 15.83 MB
+2026-11-01 08:33:00,953 | INFO     | MainThread | Statistics: C:\Users\SUBHRADEEP\duck-load-test\stats.csv

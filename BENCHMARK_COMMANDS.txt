@@ -1,0 +1,198 @@
+START HERE - GENERATE AND EXECUTE EACH SIZE SEPARATELY
+====================================================
+
+The virtual environment and DuckDB/psutil/Rich dependencies are already installed.
+Generated data/logs were cleared. Existing statistics were preserved in stats.csv. Run the commands ONE AT A TIME.
+Do not use separators in the row count below. Both commands must use the SAME size.
+
+0. OPEN THE PROJECT AND ACTIVATE PYTHON
+-------------------------------------
+cd C:\Users\SUBHRADEEP\duck-load-test
+.\.venv\Scripts\Activate.ps1
+python --version
+
+If your prompt already starts with (.venv), it is already activated.
+If activation is blocked by PowerShell, replace python in every command below with:
+.\.venv\Scripts\python.exe
+
+1. 100,000 RECORDS
+-----------------
+Generate raw + reference:
+python generate_data.py --rows 100000
+
+After generation succeeds, execute the full pipeline:
+python main.py --rows 100000
+
+2. 1 MILLION RECORDS
+-------------------
+python generate_data.py --rows 1000000
+python main.py --rows 1000000
+
+3. 5 MILLION RECORDS
+-------------------
+python generate_data.py --rows 5000000
+python main.py --rows 5000000
+
+4. 10 MILLION RECORDS
+--------------------
+python generate_data.py --rows 10000000
+python main.py --rows 10000000
+
+5. 20 MILLION RECORDS
+--------------------
+python generate_data.py --rows 20000000
+python main.py --rows 20000000
+
+6. 35 MILLION RECORDS
+--------------------
+python generate_data.py --rows 35000000
+python main.py --rows 35000000
+
+Stop after each size and inspect its log and stats.csv before choosing a larger size.
+No data or load tests are generated automatically by setup.
+
+WHERE FILES GO
+--------------
+stats.csv                      ONE common file for all sizes and all commands
+batches/
+  100000_rows/
+    data/raw/customers.parquet    Generated incoming customers
+    data/raw/reference.parquet   Generated existing master customers
+    data/silver/                 Validation, cleaning and matching outputs
+    data/gold/                   Final masters and ambiguous review records
+    logs/<run_id>.log            One log per executed command
+    temp/                        DuckDB spill directory
+  1000000_rows/
+    ...same layout, independent data...
+
+Only folders actually needed are created. No top-level data/logs/reports folders
+and no extra JSON/history/TXT benchmark results. All measured sizes use decimal MB.
+Running a different --rows selects a different folder. It does not process a subset
+of another size's data. main.py checks the actual raw row count against --rows.
+If data is missing, its error gives the exact generation command to run first.
+If --rows is omitted, both scripts select config.ROWS (default 100000).
+Each size uses the same rules from config.py and the same ETL SQL.
+
+READING THE RESULTS
+-------------------
+Open stats.csv in the project folder in Excel or VS Code. Every size appends here.
+Filter stage=run for overall results; command=generate is data generation and
+command=all is full processing. command=generate_and_etl combines both in one run.
+run_id connects each run's rows with its logs/<run_id>.log.
+For one generation command there are generation + run rows.
+For one full ETL command there are raw/validation/transformation/matching/gold + run rows.
+Repeated commands append new statistics/run IDs and replace the selected size's datasets.
+After regenerating input, rerun the pipeline before using old downstream outputs.
+
+Useful columns:
+dataset_rows, input_rows, output_rows: selected and actually processed record counts.
+reference_rows, rejected_rows, matched_rows, unmatched_rows, ambiguous_rows: quality counts.
+seconds, rows_per_second: measured duration and throughput.
+raw_file_mb, reference_file_mb, retained_parquet_mb: input and total retained file space.
+input_mb, output_mb: per-stage file footprints, not physical disk I/O bytes.
+ram_budget_mb: DuckDB configured limit, default 3000 MB; this is not reserved RAM.
+peak_process_ram_mb: total process RAM, including Python and DuckDB.
+peak_duckdb_tracked_mb: observed DuckDB buffer-manager allocation peak.
+peak_python_traced_mb: Python-traced allocations during the stage.
+peak_duckdb_managed_vs_budget_percent, peak_process_rss_vs_budget_percent: budget ratios.
+configured_threads, peak_process_thread_count, peak_active_process_threads: thread counts.
+average_configured_thread_capacity_percent, peak_configured_thread_capacity_percent:
+  measured CPU core-equivalents / configured DuckDB threads * 100.
+peak_temp_mb, min_free_disk_mb: observed spill peak and free disk.
+peak_system_ram_percent, min_available_system_ram_mb: whole-system memory pressure.
+status, error, started_at, ended_at: outcome and UTC timestamps.
+Hardware/software versions, matching rule and tracing setting are recorded too.
+
+1 MB = 1,000,000 bytes. Unknown/disabled measurements are blank rather than zero.
+DuckDB tracked + Python traced do not sum to process RSS; their scopes differ.
+Thread counts include Python and monitoring threads. Active means CPU time grew
+between samples, not necessarily simultaneous execution. Sampled peaks can miss
+brief activity. CPU capacity percentages can exceed 100%. Read the log for SQL,
+quality details, measured memory, actionable warnings and full error tracebacks.
+
+OPTIONAL COMMANDS
+-----------------
+Build or refresh the readable report after running benchmarks:
+python build_benchmark_report.py
+Open benchmark_report.html in a browser for batch comparisons and stage details.
+
+Generate and execute one size in a single command/log:
+python main.py --generate --rows 100000
+
+Debug matching for an already processed size:
+python main.py --rows 100000 --stage matching
+
+Automatic sequential batches (only if you choose to run them):
+python run_batches.py --rows 100000 1000000 5000000 10000000 20000000 35000000
+This optional runner retains its timestamped dataset group and appends to the
+same project-level stats.csv. It does not create a separate statistics file.
+The two-command workflow above does not need run_batches.py.
+
+SCRIPT LIST
+-----------
+build_benchmark_report.py Read stats.csv and refresh the readable HTML batch report.
+config.py        Size-based paths, RAM/threads, matching, quality and sampling defaults.
+generate_data.py Generate deterministic raw/reference Parquet for --rows.
+main.py          Process exactly the selected --rows dataset; optional generation.
+etl.py           Validation, normalization, exact matching, Gold rules.
+monitoring.py    Resource sampling and compact CSV statistics in MB.
+logger.py        Console output and one detailed log per command.
+run_batches.py   Optional automatic multi-size runner.
+requirements.txt DuckDB, psutil and Rich.
+README.md        Project guide.
+
+ONLY IF SETTING UP ON A NEW MACHINE
+----------------------------------
+py -3.13 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+
+INPUT AND REFERENCE VOLUMES
+---------------------------
+--rows selects the number of incoming/raw records, not input + reference combined.
+REFERENCE_ROWS = 100000 fixes the total reference at exactly 100000 rows for EVERY
+input size. REFERENCE_DUPLICATE_RATE = 0.01 keeps 99000 distinct customer identities
+plus 1000 duplicate-key masters WITHIN that total. Reference master IDs are unique.
+MATCH_RATE = 0.35 only controls intended incoming matches, before quality rejection
+and ambiguity. Large inputs reuse reference matching keys; unmatched keys are outside
+the reference range. The same seed/settings regenerate the same reference contents.
+Examples: --rows 100000 gives 100000 input + 100000 reference rows; --rows 1000000
+ gives 1000000 input + the SAME 100000 reference rows.
+Actual MB is measured in raw_file_mb and reference_file_mb; file size varies with
+volume, schema, data and Parquet compression. reference_rows records the actual count.
+
+SPILL-TO-DISK TEST (NO ETL RULE CHANGES)
+--------------------------------------
+Spilling is already enabled: each batch has a configured DuckDB temp/ directory.
+It is used automatically when supported operators need more working memory than
+fits their budget. Input file size alone does not determine whether spilling occurs.
+
+1. Generate 10 million records if you have not already generated this size:
+python generate_data.py --rows 10000000
+
+2. Record a baseline using the normal 3000 MB RAM budget:
+python main.py --rows 10000000 --memory-limit 3000MB --threads 2 --spill-limit 10000MB
+
+3. Run the SAME data and thread limit with a smaller RAM budget:
+python main.py --rows 10000000 --memory-limit 512MB --threads 2 --spill-limit 10000MB
+
+The reduced budget is intended to exercise spilling in validation windows,
+reference grouping/joins, and Gold sorting/window work. Spilling is automatic,
+not guaranteed for every stage. These flags override this process only; defaults
+in config.py remain unchanged. --spill-limit caps temporary files, not Parquet output.
+
+4. Inspect common stats.csv and the new run log:
+- ram_budget_mb: 3000 for baseline, 512 for constrained run.
+- peak_temp_mb > 0: observed temporary disk use (the spill directory).
+- seconds, rows_per_second: speed comparison at the same stage and thread setting.
+- peak_process_ram_mb, peak_duckdb_tracked_mb: memory comparison.
+- min_free_disk_mb: minimum observed remaining disk capacity.
+
+Files may be removed before you inspect temp/ after completion. Use peak_temp_mb
+rather than the final folder size. One-second sampling can miss very short spills.
+If a constrained run fails from lack of working RAM, try 768MB or 1024MB instead;
+spilling does not guarantee every query can operate at an arbitrarily tiny budget.
+
+The same switches work with the optional automatic runner:
+python run_batches.py --rows 1000000 10000000 --memory-limit 512MB --threads 2 --spill-limit 10000MB
+
+Reference: https://duckdb.org/2024/07/09/memory-management

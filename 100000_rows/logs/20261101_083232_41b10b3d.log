@@ -1,0 +1,83 @@
+2026-11-01 08:32:32,643 | INFO     | MainThread | Run ID: 20261101_083232_41b10b3d
+2026-11-01 08:32:32,795 | INFO     | MainThread | Selected dataset: 100,000 rows | folder: C:\Users\SUBHRADEEP\duck-load-test\batches\100000_rows
+2026-11-01 08:32:32,795 | INFO     | MainThread | ▶ [generation] Started
+2026-11-01 08:32:32,796 | DEBUG    | MainThread | [generation] Start: 2026-11-01T03:02:32.795837+00:00 | Input: [] | Output: ['C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\raw\\customers.parquet', 'C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\raw\\reference.parquet']
+2026-11-01 08:32:32,797 | INFO     | MainThread | [generation] Output: data\raw\customers.parquet, data\raw\reference.parquet
+2026-11-01 08:32:32,797 | DEBUG    | MainThread | [generation] Memory sampling SQL: SELECT sum(memory_usage_bytes) FROM duckdb_memory()
+2026-11-01 08:32:32,837 | DEBUG    | MainThread | SQL operation:
+COPY (
+        WITH reference_ids AS (
+            SELECT i AS identity,
+                   CASE WHEN i <= 99000 THEN i
+                        ELSE 1 + (((i - 99000 - 1) * 141650939 + 42 * 7) % 99000)
+                   END AS contact_identity
+            FROM range(1, 100001) t(i)
+        ), identities AS (
+            SELECT  identity,
+                   ['AARAV', 'MAYA', 'OLIVER', 'SOFIA', 'LIAM', 'ZARA'][1 + (contact_identity % 6)]
+                   || ' ' || ['SHAH', 'SMITH', 'KHAN', 'BROWN'][1 + (contact_identity % 4)]
+                   || ' ' || contact_identity::VARCHAR AS customer_name,
+                   'customer' || contact_identity::VARCHAR || '@example.com' AS email,
+                   '1' || lpad(contact_identity::VARCHAR, 10, '0') AS phone,
+                   ['MUMBAI', 'LONDON', 'TORONTO', 'SYDNEY'][1 + (contact_identity % 4)] AS city,
+                   ['INDIA', 'UK', 'CANADA', 'AUSTRALIA'][1 + (contact_identity % 4)] AS country
+            FROM reference_ids
+        )
+            SELECT identity AS master_id, customer_name, email, phone, city, country,
+                   'REFERENCE'::VARCHAR AS source_system, DATE '2023-01-01' AS updated_date
+            FROM identities
+    ) TO 'C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/raw/reference.partial.parquet' (FORMAT PARQUET, COMPRESSION SNAPPY)
+2026-11-01 08:32:32,950 | DEBUG    | MainThread | SQL operation:
+COPY (
+        WITH row_ids AS (
+            SELECT i, CASE WHEN i > 1 AND ((i * 15485863 + 42) % 1000000) < 10000 THEN i - 1 ELSE i END AS identity
+            FROM range(1, 100001) t(i)
+        ), contact_ids AS (
+            SELECT *, CASE WHEN identity <= 35000
+                           THEN 1 + ((identity - 1) % 99000)
+                           ELSE 100000 + identity END AS contact_identity
+            FROM row_ids
+        ), identities AS (
+            SELECT i, identity,
+                   ['AARAV', 'MAYA', 'OLIVER', 'SOFIA', 'LIAM', 'ZARA'][1 + (contact_identity % 6)]
+                   || ' ' || ['SHAH', 'SMITH', 'KHAN', 'BROWN'][1 + (contact_identity % 4)]
+                   || ' ' || contact_identity::VARCHAR AS customer_name,
+                   'customer' || contact_identity::VARCHAR || '@example.com' AS email,
+                   '1' || lpad(contact_identity::VARCHAR, 10, '0') AS phone,
+                   ['MUMBAI', 'LONDON', 'TORONTO', 'SYDNEY'][1 + (contact_identity % 4)] AS city,
+                   ['INDIA', 'UK', 'CANADA', 'AUSTRALIA'][1 + (contact_identity % 4)] AS country
+            FROM contact_ids
+        )
+        SELECT CASE WHEN ((i * 32452843 + 42) % 1000000) < 10000 THEN NULL ELSE identity END::BIGINT AS customer_id,
+               CASE WHEN ((i * 49979687 + 42) % 1000000) < 10000 THEN NULL
+                    WHEN ((i * 67867967 + 42) % 1000000) < 100000 THEN '  ' || d.customer_name || '  '
+                    WHEN ((i * 86028121 + 42) % 1000000) < 200000 THEN lower(d.customer_name) ELSE d.customer_name END AS customer_name,
+               CASE WHEN ((i * 104395301 + 42) % 1000000) < 20000 THEN 'invalid-email-' || i::VARCHAR
+                    WHEN ((i * 67867967 + 42) % 1000000) < 100000 THEN '  ' || upper(d.email) || '  ' ELSE d.email END AS email,
+               CASE WHEN ((i * 122949829 + 42) % 1000000) < 20000 THEN NULL
+                    WHEN ((i * 67867967 + 42) % 1000000) < 100000 THEN '+' || substr(d.phone, 1, 1) || ' ' || substr(d.phone, 2)
+                    ELSE d.phone END AS phone,
+               CASE WHEN ((i * 67867967 + 42) % 1000000) < 100000 THEN ' ' || lower(city) || ' ' ELSE city END AS city,
+               CASE WHEN ((i * 67867967 + 42) % 1000000) < 100000 THEN ' ' || lower(country) || ' ' ELSE country END AS country,
+               CASE WHEN i % 2 = 0 THEN 'CRM' ELSE 'WEB' END AS source_system,
+               DATE '2024-01-01' + (i % 365)::INTEGER AS updated_date
+        FROM identities d
+    ) TO 'C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/raw/customers.partial.parquet' (FORMAT PARQUET, COMPRESSION SNAPPY)
+2026-11-01 08:32:33,124 | DEBUG    | MainThread | SQL operation:
+SELECT count(*) FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/raw/customers.parquet')
+2026-11-01 08:32:33,135 | DEBUG    | MainThread | SQL operation:
+SELECT count(*) FROM read_parquet('C:/Users/SUBHRADEEP/duck-load-test/batches/100000_rows/data/raw/reference.parquet')
+2026-11-01 08:32:33,144 | INFO     | MainThread | [generation] reference rows: 100000 | reference unique customers: 99000 | reference duplicate rows: 1000 | intended match percent: 35.00 | seed: 42
+2026-11-01 08:32:33,186 | INFO     | MainThread | ✓ [generation] success | 0.390s | 100000 -> 100000 rows | 256,687 rows/sec
+2026-11-01 08:32:33,187 | DEBUG    | MainThread | [generation] Full measured statistics (MB): {"stage": "generation", "status": "success", "started_at": "2026-11-01T03:02:32.795837+00:00", "input_rows": 100000, "output_rows": 100000, "input_paths": [], "output_paths": ["C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\raw\\customers.parquet", "C:\\Users\\SUBHRADEEP\\duck-load-test\\batches\\100000_rows\\data\\raw\\reference.parquet"], "input_mb": 0.0, "physical_cores": 4, "logical_cpus": 4, "duckdb_memory_budget_mb": 3000.0, "configured_threads": 2, "duckdb_managed_memory_mb": 0.295, "python_traced_current_mb": 0.006, "python_trace_scope": "stage_allocations", "duckdb_memory_sample_count": 2, "reference_rows": 100000, "reference_unique_customers": 99000, "reference_duplicate_rows": 1000, "intended_match_percent": 35.0, "seed": 42, "quality_rates": {"null": 0.01, "duplicate": 0.01, "spaces": 0.1, "mixed_case": 0.2, "invalid_email": 0.02, "missing_phone": 0.02}, "ended_at": "2026-11-01T03:02:33.185401+00:00", "elapsed_seconds": 0.389580000017304, "rows_per_second": 256686.68821694722, "output_mb": 4.071, "peak_process_rss_mb": 50.455, "peak_temp_mb": 0.0, "peak_system_ram_percent": 67.7, "system_cpu_percent_sample_mean": 36.95, "process_cpu_percent": 164.43990963898182, "peak_process_thread_count": 11, "peak_active_process_threads": 2, "peak_process_cpu_percent": 170.15590150662328, "peak_cpu_cores_used": 1.7015590150662327, "peak_configured_thread_capacity_percent": 85.07795075331164, "peak_process_rss_vs_budget_percent": 1.6818176, "min_available_system_ram_mb": 2736.206, "min_disk_free_mb": 68869.128, "resource_sample_count": 2, "process_rss_mb": 50.455, "temp_mb": 0.0, "process_thread_count": 11, "active_process_threads": 2, "total_system_ram_mb": 8461.537, "available_system_ram_mb": 2736.206, "used_system_ram_mb": 5725.331, "system_ram_percent": 67.7, "disk_total_mb": 215330.32, "disk_used_mb": 146461.192, "disk_free_mb": 68869.128, "average_cpu_cores_used": 1.644399096389818, "average_configured_thread_capacity_percent": 82.21995481949091, "process_machine_cpu_percent": 41.109977409745454, "process_rss_vs_budget_percent": 1.6818176, "peak_duckdb_managed_memory_mb": 0.295, "peak_python_traced_mb": 0.023, "duckdb_managed_vs_budget_percent": 0.0098412, "peak_duckdb_managed_vs_budget_percent": 0.0098412}
+2026-11-01 08:32:33,187 | INFO     | MainThread | [generation] Memory | DuckDB budget: 3000.00 MB | process used (RSS): 50.5 MB | peak used: 50.5 MB
+2026-11-01 08:32:33,187 | INFO     | MainThread | [generation] Memory ratio | peak process RSS / DuckDB budget: 1.68%
+2026-11-01 08:32:33,188 | INFO     | MainThread | [generation] DuckDB tracked | current: 0.30 MB | observed peak: 0.30 MB | peak / budget: 0.01%
+2026-11-01 08:32:33,188 | INFO     | MainThread | [generation] Python traced | current: 0.01 MB | peak: 0.02 MB | scope: stage_allocations
+2026-11-01 08:32:33,188 | INFO     | MainThread | [generation] Threads | DuckDB configured: 2 | peak process total: 11 | peak observed active: 2
+2026-11-01 08:32:33,188 | INFO     | MainThread | [generation] CPU capacity | average: 1.64 cores (82.2% of configured threads) | peak sampled: 1.70 cores (85.1%)
+2026-11-01 08:32:33,189 | INFO     | MainThread | [generation] System RAM | total: 8461.5 MB | used: 5725.3 MB (67.7%) | available: 2736.2 MB
+2026-11-01 08:32:33,189 | INFO     | MainThread | [generation] CPU | process: 164.4% | system sample mean: 37.0%
+2026-11-01 08:32:33,189 | INFO     | MainThread | [generation] Disk | input: 0.0 MB | output: 4.1 MB | peak temp: 0.0 MB | free: 68869.1 MB
+2026-11-01 08:32:33,196 | INFO     | MainThread | Run 20261101_083232_41b10b3d | success | 0.422s | raw 2.107 MB | reference 1.964 MB | retained Parquet 4.071 MB
+2026-11-01 08:32:33,197 | INFO     | MainThread | Statistics: C:\Users\SUBHRADEEP\duck-load-test\stats.csv
